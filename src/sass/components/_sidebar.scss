@@ -4,11 +4,24 @@
   flex-direction: column;
   background-color: #fff0de;
   overflow-y: hidden;
-
   &__content {
-    padding: 4rem 4.8rem;
+    flex: 1;
+    padding: 3.2rem 4.8rem;
     overflow-y: auto;
   }
+  &__actions {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    height: 13rem;
+    padding: 3.5rem 4rem;
+  }
+}
+
+.sidebar-list {
   &__add {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -50,6 +63,31 @@
     }
   }
 
+  &__category {
+    margin-top: 4.8rem;
+    &__title {
+      font-size: 1.4rem;
+      color: #828282;
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.4rem;
+      margin-bottom: 3.2rem;
+      align-items: center;
+      &__name {
+        font-size: 1.8rem;
+      }
+      &__qty {
+        font-size: 1.2rem;
+        color: $color-primary-orange;
+        border: 2px solid $color-primary-orange;
+        padding: 0.8rem 2rem;
+        border-radius: 9999px;
+      }
+    }
+  }
+
   &__list {
     margin-top: 4.4rem;
     &__title {
@@ -67,30 +105,6 @@
         cursor: pointer;
       }
     }
-    &__list-category {
-      margin-top: 4.8rem;
-      &__title {
-        font-size: 1.4rem;
-        color: #828282;
-      }
-      &__item {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 2.4rem;
-        margin-bottom: 3.2rem;
-        align-items: center;
-        &__name {
-          font-size: 1.8rem;
-        }
-        &__qty {
-          font-size: 1.2rem;
-          color: $color-primary-orange;
-          border: 2px solid $color-primary-orange;
-          padding: 0.8rem 2rem;
-          border-radius: 9999px;
-        }
-      }
-    }
   }
 
   &__actions {
@@ -100,6 +114,7 @@
     padding: 3.5rem 4rem;
 
     &__input-container {
+      width: 100%;
       display: flex;
       border: 2px solid $color-primary-orange;
       border-radius: 1.2rem;
@@ -124,5 +139,20 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+.sidebar-add {
+  &__title {
+    font-size: 2.4rem;
+  }
+  &__content {
+  }
+  &__actions-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.2rem;
+    justify-content: center;
   }
 }

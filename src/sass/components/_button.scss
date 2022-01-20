@@ -1,4 +1,16 @@
 .btn {
-  background-color: gray;
+  height: 100%;
+  padding: 0 2.4rem;
+  background-color: $color-primary-orange;
   color: white;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 1.2rem;
+
+  &--transparent {
+    background-color: transparent;
+    color: #34333a;
+  }
 }

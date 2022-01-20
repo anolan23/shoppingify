@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<Items />} />
+          <Route path="" element={<Items />} />
           <Route path="history" element={<History />} />
           <Route path="statistics" element={<Statistics />} />
         </Route>

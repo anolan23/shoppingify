@@ -1,0 +1,44 @@
+.items {
+  margin: 3.2rem 0;
+  &__heading {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 5.6rem;
+    @media only screen and (max-width: 1280px) {
+      grid-auto-flow: row;
+      gap: 3.2rem;
+    }
+  }
+  &__category {
+    margin: 4.8rem 0;
+    &__title {
+      font-size: 1.8rem;
+    }
+    &__items {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      align-items: flex-start;
+      column-gap: 2rem;
+      row-gap: 2.7rem;
+      margin-top: 1.8rem;
+    }
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.6rem;
+      background-color: white;
+      box-shadow: 0px 2px 12px 0px #0000000d;
+      border-radius: 1.2rem;
+      cursor: pointer;
+      &__name {
+        margin-right: 0.8rem;
+      }
+      &__icon {
+        color: #c1c1c4;
+        align-self: flex-start;
+        user-select: none;
+      }
+    }
+  }
+}

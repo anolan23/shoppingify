@@ -12,7 +12,7 @@ function NavTab({ to, icon }) {
         match ? 'navbar__tabs__tab--active' : ''
       }`}
     >
-      <span class="material-icons navbar__icon">{icon}</span>
+      <span className="material-icons navbar__icon">{icon}</span>
     </div>
   );
 }

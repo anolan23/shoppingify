@@ -4,5 +4,6 @@
   grid-template-columns: [navbar-start] 9.4rem [navbar-end main-start] 1fr [main-end sidebar-start] 40rem [sidebar-end];
   &__main {
     background-color: #fafafe;
+    padding: 0 8rem;
   }
 }
