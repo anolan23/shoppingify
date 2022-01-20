@@ -2,12 +2,19 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
+import Items from './pages/Items';
+import History from './pages/History';
+import Statistics from './pages/Statistics';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<Items />} />
+          <Route path="history" element={<History />} />
+          <Route path="statistics" element={<Statistics />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

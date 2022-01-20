@@ -1,11 +1,13 @@
 import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import { Outlet } from 'react-router-dom';
 
 function Dashboard() {
   return (
     <div className="dashboard">
       <Navbar />
-      <main className="dashboard__main">main</main>
-      <div className="sidebar">sidebar</div>
+      <Outlet />
+      <Sidebar />
     </div>
   );
 }

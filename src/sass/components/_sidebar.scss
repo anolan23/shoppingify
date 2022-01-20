@@ -1,3 +1,128 @@
 .sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #fff0de;
+  overflow-y: hidden;
+
+  &__content {
+    padding: 4rem 4.8rem;
+    overflow-y: auto;
+  }
+  &__add {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-flow: column;
+    gap: 2.4rem;
+    background-color: #80485b;
+    border-radius: 2.4rem;
+    padding: 1.8rem 2.4rem;
+
+    &__icon-container {
+      position: relative;
+    }
+
+    &__icon {
+      position: absolute;
+      top: -35px;
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &__text {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+    &__btn {
+      background-color: white;
+      color: #34333a;
+      font-family: inherit;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border: none;
+      padding: 1.2rem 2.9rem;
+      white-space: nowrap;
+      border-radius: 1.2rem;
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    margin-top: 4.4rem;
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #34333a;
+      &__text {
+        font-size: 2.4rem;
+        font-weight: 700;
+      }
+      &__icon {
+        height: 18px;
+        width: 18px;
+        cursor: pointer;
+      }
+    }
+    &__list-category {
+      margin-top: 4.8rem;
+      &__title {
+        font-size: 1.4rem;
+        color: #828282;
+      }
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2.4rem;
+        margin-bottom: 3.2rem;
+        align-items: center;
+        &__name {
+          font-size: 1.8rem;
+        }
+        &__qty {
+          font-size: 1.2rem;
+          color: $color-primary-orange;
+          border: 2px solid $color-primary-orange;
+          padding: 0.8rem 2rem;
+          border-radius: 9999px;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 3.5rem 4rem;
+
+    &__input-container {
+      display: flex;
+      border: 2px solid $color-primary-orange;
+      border-radius: 1.2rem;
+      overflow: hidden;
+
+      &__input {
+        padding-left: 1.6rem;
+        flex: 1;
+        border: none;
+        outline: none;
+        font-family: inherit;
+        font-size: 1.4rem;
+        &::placeholder {
+          color: #bdbdbd;
+        }
+      }
+      &__btn {
+        font-weight: 700;
+        padding: 2rem 2.5rem;
+        color: white;
+        background-color: $color-primary-orange;
+        cursor: pointer;
+      }
+    }
+  }
 }
