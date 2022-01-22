@@ -4,6 +4,10 @@ import Button from './Button';
 import Input from './Input';
 import InputGroup from './InputGroup';
 import TextArea from './TextArea';
+
+import MyAsyncCreatableSelect from './MyAsyncCreatableSelect';
+import { searchCategories, addCategory, addItem } from '../api';
+
 function SidebarAdd({ onCancelClick, onSaveClick }) {
   const formik = useFormik({
     initialValues: {
@@ -12,16 +16,34 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
       image: '',
       category: '',
     },
-    onSubmit(values) {
-      console.log(values);
+    async onSubmit(item, { resetForm }) {
+      try {
+        const { name, note, image, category } = item;
+        await addItem({
+          name: name || null,
+          note: note || null,
+          image: image || null,
+          category_id: category.value,
+        });
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    validate({ name, note, image, category }) {
+      let errors = {};
+      if (!name) errors.name = 'Required';
+      if (!category) errors.category = 'Required';
+      return errors;
     },
   });
+
   return (
     <aside className="sidebar">
       <form
         id="add-item"
         onSubmit={formik.handleSubmit}
-        className="sidebar__content"
+        className="sidebar__content sidebar-add__content"
       >
         <span className="sidebar-add__title">Add a new item</span>
         <InputGroup labelText="Name" htmlFor="name">
@@ -29,7 +51,6 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
             value={formik.values.name}
             name="name"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeHolder="Enter a name"
           />
         </InputGroup>
@@ -38,7 +59,6 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
             value={formik.values.note}
             name="note"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeHolder="Enter a note"
           />
         </InputGroup>
@@ -47,17 +67,40 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
             value={formik.values.image}
             name="image"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeHolder="Enter a url"
           />
         </InputGroup>
         <InputGroup labelText="Category" htmlFor="category">
-          <Input
-            value={formik.values.category}
+          <MyAsyncCreatableSelect
             name="category"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeHolder="Enter a category"
+            className="async-select-container"
+            classNamePrefix="async-select"
+            value={formik.values.category}
+            onChange={(value) => formik.setFieldValue('category', value)}
+            defaultOptions={[
+              { value: 1, label: 'Meat and Fish' },
+              { value: 2, label: 'Fruits and Vegetables' },
+              { value: 3, label: 'Deserts' },
+            ]}
+            onCreateOption={async function (name) {
+              try {
+                const added = await addCategory(name);
+                console.log(added);
+                formik.setFieldValue('category', {
+                  value: added.id,
+                  label: added.name,
+                });
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+            loadOptions={async (q) => {
+              const options = await searchCategories({ q });
+              return options.map((option) => {
+                return { value: option.id, label: option.name };
+              });
+            }}
+            placeholder="Enter a category"
           />
         </InputGroup>
       </form>

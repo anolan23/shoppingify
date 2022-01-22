@@ -1,12 +1,12 @@
 const db = require('../index.js');
 
-class Users {
+class Items {
   static async find() {
     try {
       const { rows } = await db.query(
         `
         SELECT *
-        FROM users
+        FROM items
         `,
         []
       );
@@ -16,8 +16,48 @@ class Users {
     }
   }
 
+  static async search() {
+    try {
+      const { rows } = await db.query(
+        `
+        SELECT *, 
+          (
+            SELECT jsonb_agg(nested_item)
+            FROM (
+              SELECT *
+              FROM items
+              WHERE category_id = categories.id
+            ) AS nested_item
+          ) AS items
+        FROM categories
+        `,
+        []
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async add(item) {
+    try {
+      const { name, note, image, category_id } = item;
+      const { rows } = await db.query(
+        `
+        INSERT INTO items (name, note, image, category_id)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+        `,
+        [name, note, image, category_id]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async update(id, cols) {
-    let query = ['UPDATE users'];
+    let query = ['UPDATE items'];
     query.push('SET');
 
     // Create another array storing each set command
@@ -47,4 +87,4 @@ class Users {
   }
 }
 
-module.exports = Users;
+module.exports = Items;

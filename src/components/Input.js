@@ -1,12 +1,4 @@
-function Input({
-  type = 'text',
-  onChange,
-  onBlur,
-  value,
-  name,
-  id,
-  placeHolder,
-}) {
+function Input({ type = 'text', onChange, onBlur, value, name, placeHolder }) {
   return (
     <input
       id={name}
