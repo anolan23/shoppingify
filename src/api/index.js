@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export async function getCategories() {
+  try {
+    const response = await axios.get('/api/categories');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function searchCategories({ q, limit }) {
   try {
     const response = await axios.get('/api/categories/search', {

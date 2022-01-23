@@ -1,10 +1,14 @@
-function Category({ title, ingredients }) {
+function Category({ title, items, onItemClick }) {
   const renderItems = () => {
-    if (!ingredients) return null;
-    return ingredients.map((ing, index) => {
-      const { name, qty } = ing;
+    if (!items) return null;
+    return items.map((item, index) => {
+      const { name, qty } = item;
       return (
-        <div className="items__category__item" key={index}>
+        <div
+          key={index}
+          className="items__category__item"
+          onClick={() => onItemClick(item)}
+        >
           <span className="items__category__item__name">{name}</span>
           <span className="material-icons items__category__item__icon">
             add

@@ -27,7 +27,7 @@ function SidebarList({ onAddClick }) {
               edit
             </span>
           </div>
-          <ListCategory
+          {/* <ListCategory
             title="Fruit and vegetables"
             ingredients={[
               { name: 'Avocado', qty: 3 },
@@ -50,7 +50,7 @@ function SidebarList({ onAddClick }) {
               { name: 'Apple', qty: 3 },
               { name: 'Banana', qty: 1 },
             ]}
-          />
+          /> */}
         </section>
       </div>
 

@@ -1,13 +1,9 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useState, useEffect } from 'react';
 
-export function useFetch({ method, url, params, data }) {
-  const [response, setResponse] = useState({
-    data: null,
-    loading: true,
-    error: null,
-  });
+export default function useFetch({ method, url, params, data: axiosData }) {
+  const [data, setData] = useState(null);
+
   useEffect(() => {
     request();
     async function request() {
@@ -16,16 +12,14 @@ export function useFetch({ method, url, params, data }) {
           method,
           url,
           params,
-          data,
+          axiosData,
         });
-        setResponse({ data: response.data, loading: false, error: null });
+        setData(response.data);
       } catch (error) {
-        setResponse((prevResponse) => {
-          return { ...prevResponse, loading: false, error };
-        });
         throw error;
       }
     }
   }, []);
-  return response;
+
+  return { data, setData };
 }

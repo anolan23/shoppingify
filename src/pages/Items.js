@@ -2,7 +2,27 @@ import React from 'react';
 import Category from '../components/Category';
 import Search from '../components/Search';
 
-function Items() {
+import { useStore } from '../context/store';
+
+function Items({ categories }) {
+  const [state, dispatch] = useStore();
+  console.log(state);
+  const renderCategories = function () {
+    if (!categories) return null;
+    return categories.map((category) => {
+      return (
+        <Category
+          key={category.id}
+          title={category.name}
+          items={category.items}
+          onItemClick={(item) => {
+            dispatch({ type: 'SET_ITEM', payload: item });
+          }}
+        />
+      );
+    });
+  };
+
   return (
     <main className="dashboard__main">
       <div className="items">
@@ -13,28 +33,7 @@ function Items() {
           </h1>
           <Search />
         </div>
-        <Category
-          title="Fruit and vegetables"
-          ingredients={[
-            { name: 'Banana' },
-            { name: 'Avocado' },
-            { name: 'Pear' },
-            { name: 'Banana' },
-            { name: 'Avocado' },
-            { name: 'Pear' },
-          ]}
-        />
-        <Category
-          title="Meat and Fish"
-          ingredients={[
-            { name: 'Banana' },
-            { name: 'Pre-cooked corn 450g' },
-            { name: 'Pear' },
-            { name: 'Pork fillets 450g' },
-            { name: 'Avocado' },
-            { name: 'Pear' },
-          ]}
-        />
+        {renderCategories()}
       </div>
     </main>
   );
