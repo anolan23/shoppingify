@@ -4,7 +4,7 @@ import ListCategory from './ListCategory';
 function SidebarList({ onAddClick }) {
   return (
     <aside className="sidebar">
-      <div className="sidebar__content">
+      <div className="sidebar__content sidebar-list">
         <div className="sidebar-list__add">
           <div className="sidebar-list__add__icon-container">
             <Icon className="sidebar-list__add__icon" />

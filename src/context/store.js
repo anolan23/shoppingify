@@ -8,7 +8,7 @@ export default function StoreProvider({ children }) {
   const INITIAL_STATE = {
     categories: [],
     item: {},
-    activeList: {
+    list: {
       items: [],
     },
     lists: [],

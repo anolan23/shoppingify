@@ -14,7 +14,7 @@ function Items({ categories }) {
           key={category.id}
           title={category.name}
           items={category.items}
-          onItemClick={(item) => setItem(item)}
+          onItemClick={(item) => setItem({ ...item, category: category.name })}
         />
       );
     });

@@ -7,7 +7,8 @@ import useActions from '../hooks/useActions';
 
 function Sidebar() {
   const [state] = useStore();
-  const { setMode } = useActions();
+  const { setMode, addItem } = useActions();
+  console.log(state);
 
   const renderMode = () => {
     switch (state.sidebar) {
@@ -21,7 +22,13 @@ function Sidebar() {
           />
         );
       case 'item':
-        return <SidebarItem />;
+        return (
+          <SidebarItem
+            item={state.item}
+            onBackClick={() => setMode('list')}
+            onAddClick={(item) => addItem(item)}
+          />
+        );
       default:
         break;
     }

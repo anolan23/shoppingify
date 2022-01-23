@@ -10,4 +10,11 @@ h1 {
   color: #34333a;
 }
 
-
+.link {
+  &,
+  &:link,
+  &:visited {
+    color: $color-primary-orange;
+    cursor: pointer;
+  }
+}

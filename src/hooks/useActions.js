@@ -14,7 +14,7 @@ const setItem = (dispatch) => (item) => {
   dispatch({ type: 'SET_ITEM', payload: item });
 };
 
-const addItem = (state, dispatch) => (item) => {
+const addItem = (dispatch) => (item) => {
   dispatch({ type: 'ADD_ITEM', payload: item });
 };
 
@@ -31,5 +31,6 @@ export default function useActions() {
     setItem: setItem(dispatch),
     setMode: setMode(dispatch),
     fetchCategories: fetchCategories(dispatch),
+    addItem: addItem(dispatch),
   };
 }
