@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import SidebarAdd from './SidebarAdd';
 import SidebarList from './SidebarList';
+import SidebarItem from './SidebarItem';
+import { useStore } from '../context/store';
+import useActions from '../hooks/useActions';
 
 function Sidebar() {
-  const [mode, setMode] = useState('list');
-  const renderMode = (mode) => {
-    switch (mode) {
+  const [state] = useStore();
+  const { setMode } = useActions();
+
+  const renderMode = () => {
+    switch (state.sidebar) {
       case 'list':
         return <SidebarList onAddClick={() => setMode('add')} />;
       case 'add':
@@ -15,10 +20,12 @@ function Sidebar() {
             onSaveClick={() => {}}
           />
         );
+      case 'item':
+        return <SidebarItem />;
       default:
         break;
     }
   };
-  return <React.Fragment>{renderMode(mode)}</React.Fragment>;
+  return <React.Fragment>{renderMode()}</React.Fragment>;
 }
 export default Sidebar;
