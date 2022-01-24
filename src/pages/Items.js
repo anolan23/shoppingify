@@ -1,11 +1,12 @@
 import React from 'react';
 import Category from '../components/Category';
 import Search from '../components/Search';
-
+import { itemsToCategories } from '../lib/helpers';
 import useActions from '../hooks/useActions';
 
-function Items({ categories }) {
+function Items({ items }) {
   const { setItem } = useActions();
+  const categories = itemsToCategories(items);
   const renderCategories = function () {
     if (!categories) return null;
     return categories.map((category) => {

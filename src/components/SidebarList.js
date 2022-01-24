@@ -1,7 +1,18 @@
 import { ReactComponent as Icon } from '../images/bottle.svg';
 import ListCategory from './ListCategory';
+import { itemsToCategories } from '../lib/helpers';
 
-function SidebarList({ onAddClick }) {
+function SidebarList({ list, onAddClick }) {
+  const renderListCategories = function () {
+    const categories = itemsToCategories(list.items);
+    if (!categories) return null;
+    return categories.map((category, index) => {
+      return (
+        <ListCategory key={index} name={category.name} items={category.items} />
+      );
+    });
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar__content sidebar-list">
@@ -27,30 +38,7 @@ function SidebarList({ onAddClick }) {
               edit
             </span>
           </div>
-          {/* <ListCategory
-            title="Fruit and vegetables"
-            ingredients={[
-              { name: 'Avocado', qty: 3 },
-              { name: 'Apple', qty: 3 },
-              { name: 'Banana', qty: 1 },
-            ]}
-          />
-          <ListCategory
-            title="Fruit and vegetables"
-            ingredients={[
-              { name: 'Avocado', qty: 3 },
-              { name: 'Apple', qty: 3 },
-              { name: 'Banana', qty: 1 },
-            ]}
-          />
-          <ListCategory
-            title="Fruit and vegetables"
-            ingredients={[
-              { name: 'Avocado', qty: 3 },
-              { name: 'Apple', qty: 3 },
-              { name: 'Banana', qty: 1 },
-            ]}
-          /> */}
+          {renderListCategories()}
         </section>
       </div>
 

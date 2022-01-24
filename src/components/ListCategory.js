@@ -1,12 +1,14 @@
-function ListCategory({ title, ingredients }) {
+function ListCategory({ name, items }) {
   const renderItems = () => {
-    if (!ingredients) return null;
-    return ingredients.map((ing, index) => {
-      const { name, qty } = ing;
+    if (!items) return null;
+    return items.map((item, index) => {
+      const { name: itemName, qty } = item;
       return (
         <div className="sidebar-list__category__item" key={index}>
-          <span className="sidebar-list__category__item__name">{name}</span>
-          <div className="sidebar-list__category__item__qty">{`${qty} pcs`}</div>
+          <span className="sidebar-list__category__item__name">{itemName}</span>
+          <div className="sidebar-list__category__item__qty">{`${
+            qty || 1
+          } pcs`}</div>
         </div>
       );
     });
@@ -14,7 +16,7 @@ function ListCategory({ title, ingredients }) {
 
   return (
     <section className="sidebar-list__category">
-      <span className="sidebar-list__category__title">{title}</span>
+      <span className="sidebar-list__category__title">{name}</span>
       {renderItems()}
     </section>
   );

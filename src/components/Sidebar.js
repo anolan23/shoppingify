@@ -8,12 +8,13 @@ import useActions from '../hooks/useActions';
 function Sidebar() {
   const [state] = useStore();
   const { setMode, addItem } = useActions();
-  console.log(state);
 
   const renderMode = () => {
     switch (state.sidebar) {
       case 'list':
-        return <SidebarList onAddClick={() => setMode('add')} />;
+        return (
+          <SidebarList onAddClick={() => setMode('add')} list={state.list} />
+        );
       case 'add':
         return (
           <SidebarAdd

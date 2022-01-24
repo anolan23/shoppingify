@@ -6,7 +6,7 @@ const StoreContext = createContext({});
 
 export default function StoreProvider({ children }) {
   const INITIAL_STATE = {
-    categories: [],
+    items: [],
     item: {},
     list: {
       items: [],

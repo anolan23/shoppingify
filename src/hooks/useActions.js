@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useStore } from '../context/store';
 
-const fetchCategories = (dispatch) => async () => {
+const fetchItems = (dispatch) => async () => {
   try {
-    const response = await axios.get('/api/categories');
-    dispatch({ type: 'FETCH_CATEGORIES', payload: response.data });
+    const response = await axios.get('/api/items');
+    dispatch({ type: 'FETCH_ITEMS', payload: response.data });
   } catch (error) {
     console.error(error);
   }
@@ -30,7 +30,7 @@ export default function useActions() {
   return {
     setItem: setItem(dispatch),
     setMode: setMode(dispatch),
-    fetchCategories: fetchCategories(dispatch),
+    fetchItems: fetchItems(dispatch),
     addItem: addItem(dispatch),
   };
 }

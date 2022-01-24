@@ -2,7 +2,7 @@ import itemReducer from './itemReducer';
 import listReducer from './listReducer';
 import listsReducer from './listsReducer';
 import sidebarReducer from './sidebarReducer';
-import categoriesReducer from './categoriesReducer';
+import categoriesReducer from './itemsReducer';
 
 function combineReducers(...reducers) {
   return (state, action) =>

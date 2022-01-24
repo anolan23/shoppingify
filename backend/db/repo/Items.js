@@ -5,8 +5,9 @@ class Items {
     try {
       const { rows } = await db.query(
         `
-        SELECT *
+        SELECT items.*, categories.name AS category
         FROM items
+        JOIN categories ON categories.id = items.category_id
         `,
         []
       );
