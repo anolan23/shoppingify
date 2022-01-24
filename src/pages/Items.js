@@ -5,7 +5,7 @@ import { itemsToCategories } from '../lib/helpers';
 import useActions from '../hooks/useActions';
 
 function Items({ items }) {
-  const { setItem } = useActions();
+  const { setItem, setItems } = useActions();
   const categories = itemsToCategories(items);
   const renderCategories = function () {
     if (!categories) return null;
@@ -29,7 +29,7 @@ function Items({ items }) {
             <span className="highlight">Shoppingify</span> allows you take your
             shopping list wherever you go
           </h1>
-          <Search />
+          <Search setItems={setItems} />
         </div>
         {renderCategories()}
       </div>

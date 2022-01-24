@@ -23,6 +23,20 @@ export async function searchCategories({ q, limit }) {
   }
 }
 
+export async function searchItems({ q, limit }) {
+  try {
+    const response = await axios.get('/api/items/search', {
+      params: {
+        q,
+        limit,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function addCategory(name) {
   try {
     const response = await axios.post('/api/categories', {
@@ -34,7 +48,7 @@ export async function addCategory(name) {
   }
 }
 
-export async function addItem(item) {
+export async function createItem(item) {
   try {
     const response = await axios.post('/api/items', { item });
     return response.data;

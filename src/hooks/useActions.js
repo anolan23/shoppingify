@@ -10,6 +10,10 @@ const fetchItems = (dispatch) => async () => {
   }
 };
 
+const setItems = (dispatch) => (items) => {
+  dispatch({ type: 'SET_ITEMS', payload: items });
+};
+
 const setItem = (dispatch) => (item) => {
   dispatch({ type: 'SET_ITEM', payload: item });
 };
@@ -29,6 +33,7 @@ export default function useActions() {
 
   return {
     setItem: setItem(dispatch),
+    setItems: setItems(dispatch),
     setMode: setMode(dispatch),
     fetchItems: fetchItems(dispatch),
     addItem: addItem(dispatch),

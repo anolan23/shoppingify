@@ -8,6 +8,7 @@ class Items {
         SELECT items.*, categories.name AS category
         FROM items
         JOIN categories ON categories.id = items.category_id
+        ORDER BY category
         `,
         []
       );
@@ -17,22 +18,18 @@ class Items {
     }
   }
 
-  static async search() {
+  static async search(q, limit) {
     try {
       const { rows } = await db.query(
         `
-        SELECT *, 
-          (
-            SELECT jsonb_agg(nested_item)
-            FROM (
-              SELECT *
-              FROM items
-              WHERE category_id = categories.id
-            ) AS nested_item
-          ) AS items
-        FROM categories
+        SELECT items.*, categories.name AS category
+        FROM items
+        JOIN categories ON categories.id = items.category_id
+        WHERE items.name ILIKE $1
+        ORDER BY category
+        LIMIT $2
         `,
-        []
+        [`%${q}%`, limit]
       );
       return rows;
     } catch (error) {
@@ -45,9 +42,14 @@ class Items {
       const { name, note, image, category_id } = item;
       const { rows } = await db.query(
         `
-        INSERT INTO items (name, note, image, category_id)
-        VALUES ($1, $2, $3, $4)
-        RETURNING *
+        WITH inserted_item AS(
+          INSERT INTO items (name, note, image, category_id)
+          VALUES ($1, $2, $3, $4)
+          RETURNING *
+          )
+          SELECT inserted_item.*, categories.name AS category
+          FROM inserted_item
+          JOIN categories ON categories.id = inserted_item.category_id
         `,
         [name, note, image, category_id]
       );

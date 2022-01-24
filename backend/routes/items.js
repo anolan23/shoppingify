@@ -23,4 +23,14 @@ router.post('/api/items', async (req, res) => {
   }
 });
 
+router.get('/api/items/search', async (req, res) => {
+  try {
+    const { q, limit } = req.query;
+    const categories = await Items.search(q, limit);
+    res.send(categories);
+  } catch (error) {
+    res.status(error.status || 500).send({ error: error.message });
+  }
+});
+
 module.exports = router;
