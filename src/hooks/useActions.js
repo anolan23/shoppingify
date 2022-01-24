@@ -19,11 +19,15 @@ const setItem = (dispatch) => (item) => {
 };
 
 const addItem = (dispatch) => (item) => {
-  dispatch({ type: 'ADD_ITEM', payload: item });
+  dispatch({ type: 'ADD_ITEM_TO_LIST', payload: item });
+};
+
+const createItem = (dispatch) => (item) => {
+  dispatch({ type: 'CREATE_ITEM', payload: item });
 };
 
 const setMode = (dispatch) => (mode) => {
-  const modes = ['list', 'add', 'item'];
+  const modes = ['edit', 'add', 'item', 'complete'];
   if (!modes.includes(mode)) return;
   dispatch({ type: 'SET_MODE', payload: mode });
 };
@@ -37,5 +41,6 @@ export default function useActions() {
     setMode: setMode(dispatch),
     fetchItems: fetchItems(dispatch),
     addItem: addItem(dispatch),
+    createItem: createItem(dispatch),
   };
 }

@@ -6,11 +6,15 @@ import InputGroup from './InputGroup';
 import TextArea from './TextArea';
 
 import MyAsyncCreatableSelect from './MyAsyncCreatableSelect';
-import { searchCategories, addCategory, createItem } from '../api';
+import {
+  searchCategories,
+  addCategory,
+  createItem as apiCreateItem,
+} from '../api';
 import useActions from '../hooks/useActions';
 
 function SidebarAdd({ onCancelClick, onSaveClick }) {
-  const { addItem } = useActions();
+  const { createItem } = useActions();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -21,14 +25,14 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
     async onSubmit(item, { resetForm }) {
       try {
         const { name, note, image, category } = item;
-        const newItem = await createItem({
+        const newItem = await apiCreateItem({
           name: name || null,
           note: note || null,
           image: image || null,
           category_id: category.value,
         });
         resetForm();
-        addItem(newItem);
+        createItem(newItem);
       } catch (error) {
         console.error(error);
       }

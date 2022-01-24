@@ -1,6 +1,6 @@
 export default function reducer(state, action) {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'CREATE_ITEM':
       return { ...state, items: [...state.items, action.payload] };
     case 'FETCH_ITEMS':
       return { ...state, items: action.payload };

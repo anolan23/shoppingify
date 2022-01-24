@@ -1,0 +1,40 @@
+.quantity {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 1.2rem;
+  margin-left: 1.6rem;
+  &__trash-container {
+    background-color: $color-primary-orange;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.2rem;
+    border: none;
+    cursor: pointer;
+
+    &__trash {
+      color: white;
+      padding: 1.4rem;
+      font-size: 1.8rem;
+    }
+  }
+  &__icon {
+    color: $color-primary-orange;
+    margin: 0 6px;
+    cursor: pointer;
+  }
+  &__btn {
+    font-size: 1.2rem;
+    color: $color-primary-orange;
+    border: 2px solid $color-primary-orange;
+    padding: 0.8rem 2rem;
+    margin: 6.5px 0;
+    border-radius: 9999px;
+    white-space: nowrap;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

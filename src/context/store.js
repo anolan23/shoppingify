@@ -12,7 +12,7 @@ export default function StoreProvider({ children }) {
       items: [],
     },
     lists: [],
-    sidebar: 'list',
+    sidebar: 'edit',
   };
 
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
