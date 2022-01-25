@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SidebarAdd from './SidebarAdd';
 import SidebarList from './SidebarList';
 import SidebarItem from './SidebarItem';
-import SidebarComplete from './SidebarComplete';
 import { useStore } from '../context/store';
 import useActions from '../hooks/useActions';
 
@@ -12,26 +11,11 @@ function Sidebar() {
   console.log(state);
 
   const renderMode = () => {
-    switch (state.sidebar) {
+    switch (state.mode) {
       case 'edit':
-      case 'complete':
-        return (
-          <SidebarList
-            onAddClick={() => setMode('add')}
-            mode={state.sidebar}
-            list={state.list}
-            onSaveClick={(title) => {
-              const list = JSON.stringify({
-                ...state.list,
-                timestamp: Date.now(),
-                title,
-              });
-              localStorage.setItem('list', list);
-              setMode('complete');
-            }}
-          />
-        );
-      case 'add':
+      case 'check':
+        return <SidebarList mode={state.mode} list={state.list} />;
+      case 'create':
         return (
           <SidebarAdd
             onCancelClick={() => setMode('edit')}

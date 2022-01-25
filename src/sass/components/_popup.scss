@@ -1,0 +1,25 @@
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  background-color: rgba(black, $alpha: 0.5);
+  transition: all 0.1s;
+
+  &__window {
+    background-color: white;
+    min-width: 60rem;
+    max-width: 80vw;
+    max-height: 90vh;
+    padding: 2.4rem 3.2rem;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    animation: moveInBottom 0.4s ease;
+  }
+}

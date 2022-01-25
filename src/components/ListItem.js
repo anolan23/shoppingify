@@ -1,12 +1,36 @@
 import Quantity from './Quantity';
+import useActions from '../hooks/useActions';
+import Checkbox from './Checkbox';
 
-function ListItem({ item }) {
-  const { name, qty } = item;
-  return (
-    <div className="sidebar-list__category__item">
-      <span className="sidebar-list__category__item__name">{name}</span>
-      <Quantity>{qty}</Quantity>
-    </div>
-  );
+function ListItem({ item, mode }) {
+  const { name, qty, id, checked } = item;
+  const { removeItem, toggleItem } = useActions();
+
+  switch (mode) {
+    case 'check':
+      return (
+        <div className="sidebar-list__category__item">
+          <div className="sidebar-list__category__item__group">
+            <Checkbox checked={checked} onChange={() => toggleItem(id)} />
+            <span
+              className={`sidebar-list__category__item__name ${
+                checked ? 'sidebar-list__category__item__name--checked' : ''
+              }`}
+            >
+              {name}
+            </span>
+          </div>
+          <Quantity mode={mode}>{qty}</Quantity>
+        </div>
+      );
+
+    default:
+      return (
+        <div className="sidebar-list__category__item">
+          <span className="sidebar-list__category__item__name">{name}</span>
+          <Quantity onRemoveItem={() => removeItem(id)}>{qty}</Quantity>
+        </div>
+      );
+  }
 }
 export default ListItem;

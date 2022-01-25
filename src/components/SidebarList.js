@@ -1,15 +1,17 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import { ReactComponent as Icon } from '../images/bottle.svg';
 import ListCategory from './ListCategory';
 import { itemsToCategories } from '../lib/helpers';
 import Button from './Button';
+import useActions from '../hooks/useActions';
 
-class SidebarList extends Component {
-  state = { title: '' };
+function SidebarList({ list, mode, onToggleModeClick }) {
+  const [title, setTitle] = useState('');
+  const { setShowCancelListPopup, setMode } = useActions();
 
-  _renderListCategories() {
-    const categories = itemsToCategories(this.props.list.items);
+  const renderListCategories = function () {
+    const categories = itemsToCategories(list.items);
     if (!categories) return null;
     return categories.map((category, index) => {
       return (
@@ -17,34 +19,41 @@ class SidebarList extends Component {
           key={index}
           name={category.name}
           items={category.items}
+          mode={mode}
         />
       );
     });
-  }
+  };
 
-  _onSubmit(e) {
+  const onSubmit = function (e) {
     e.preventDefault();
-    this.props.onSaveClick(this.state.title);
-    this.setState({ title: '' });
-  }
+    const string = JSON.stringify({
+      ...list,
+      timestamp: Date.now(),
+      title,
+    });
+    localStorage.setItem('list', string);
+    setMode('check');
+    setTitle('');
+  };
 
-  _onChange(e) {
-    this.setState({ title: e.target.value });
-  }
+  const onChange = function (e) {
+    setTitle(e.target.value);
+  };
 
-  _renderActions() {
-    switch (this.props.mode) {
+  const renderActions = function () {
+    switch (mode) {
       case 'edit':
         return (
           <form
-            onSubmit={this._onSubmit.bind(this)}
+            onSubmit={onSubmit}
             className="sidebar-list__actions__input-container"
           >
             <input
               className="sidebar-list__actions__input-container__input"
               placeholder="Enter a name"
-              onChange={this._onChange.bind(this)}
-              value={this.state.title}
+              onChange={onChange}
+              value={title}
             />
             <button
               type="submit"
@@ -54,10 +63,13 @@ class SidebarList extends Component {
             </button>
           </form>
         );
-      case 'complete':
+      case 'check':
         return (
           <div className="sidebar-add__actions-container">
-            <Button onClick={this.props.onCancelClick} color="transparent">
+            <Button
+              onClick={() => setShowCancelListPopup(true)}
+              color="transparent"
+            >
               Cancel
             </Button>
             <Button color="sky-blue">Complete</Button>
@@ -67,44 +79,48 @@ class SidebarList extends Component {
       default:
         break;
     }
-  }
+  };
 
-  render() {
-    return (
-      <aside className="sidebar">
-        <div className="sidebar__content sidebar-list">
-          <div className="sidebar-list__add">
-            <div className="sidebar-list__add__icon-container">
-              <Icon className="sidebar-list__add__icon" />
-            </div>
-            <div className="sidebar-list__add__info">
-              <span className="sidebar-list__add__text">
-                Didn't find what you need?
-              </span>
-              <button
-                className="sidebar-list__add__btn"
-                onClick={this.props.onAddClick}
-              >
-                Add item
-              </button>
-            </div>
+  return (
+    <aside className="sidebar">
+      <div className="sidebar__content sidebar-list">
+        <div className="sidebar-list__add">
+          <div className="sidebar-list__add__icon-container">
+            <Icon className="sidebar-list__add__icon" />
           </div>
-          <section className="sidebar-list__list">
-            <div className="sidebar-list__list__title">
-              <span className="sidebar-list__list__title__text">
-                Shopping list
-              </span>
-              <span className="material-icons sidebar-list__list__title__icon">
-                edit
-              </span>
-            </div>
-            {this._renderListCategories()}
-          </section>
+          <div className="sidebar-list__add__info">
+            <span className="sidebar-list__add__text">
+              Didn't find what you need?
+            </span>
+            <button
+              className="sidebar-list__add__btn"
+              onClick={() => setMode('create')}
+            >
+              Add item
+            </button>
+          </div>
         </div>
+        <section className="sidebar-list__list">
+          <div className="sidebar-list__list__title">
+            <span className="sidebar-list__list__title__text">
+              Shopping list
+            </span>
+            <span
+              className="material-icons sidebar-list__list__title__icon"
+              onClick={() => {
+                if (mode === 'edit') setMode('check');
+                else setMode('edit');
+              }}
+            >
+              edit
+            </span>
+          </div>
+          {renderListCategories()}
+        </section>
+      </div>
 
-        <div className="sidebar__actions">{this._renderActions()}</div>
-      </aside>
-    );
-  }
+      <div className="sidebar__actions">{renderActions()}</div>
+    </aside>
+  );
 }
 export default SidebarList;

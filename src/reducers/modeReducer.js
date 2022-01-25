@@ -1,13 +1,13 @@
 export default function reducer(state, action) {
   switch (action.type) {
     case 'SET_ITEM':
-      return { ...state, sidebar: 'item' };
+      return { ...state, mode: 'item' };
     case 'CREATE_ITEM':
-      return { ...state, sidebar: 'edit' };
+      return { ...state, mode: 'edit' };
     case 'ADD_ITEM_TO_LIST':
-      return { ...state, sidebar: 'edit' };
+      return { ...state, mode: 'edit' };
     case 'SET_MODE':
-      return { ...state, sidebar: action.payload };
+      return { ...state, mode: action.payload };
     default:
       return state;
   }

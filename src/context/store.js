@@ -12,7 +12,8 @@ export default function StoreProvider({ children }) {
       items: [],
     },
     lists: [],
-    sidebar: 'edit',
+    mode: 'edit',
+    showCancelListPopup: false,
   };
 
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);

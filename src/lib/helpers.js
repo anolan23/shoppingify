@@ -1,4 +1,4 @@
-export function itemsToCategories(items) {
+export function itemsToCategories(items = []) {
   const categories = items.reduce((acc, curr) => {
     const category = acc.find((category) => category.id === curr.category_id);
     if (!category) {

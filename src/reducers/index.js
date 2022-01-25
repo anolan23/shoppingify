@@ -1,8 +1,9 @@
 import itemReducer from './itemReducer';
 import listReducer from './listReducer';
 import listsReducer from './listsReducer';
-import sidebarReducer from './sidebarReducer';
+import modeReducer from './modeReducer';
 import categoriesReducer from './itemsReducer';
+import popupReducer from './popupReducer';
 
 function combineReducers(...reducers) {
   return (state, action) =>
@@ -14,5 +15,6 @@ export default combineReducers(
   itemReducer,
   listReducer,
   listsReducer,
-  sidebarReducer
+  modeReducer,
+  popupReducer
 );

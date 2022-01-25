@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import useOutsideClick from '../hooks/useOutsideClick';
 
-function Quantity({ children }) {
+function Quantity({ mode, onRemoveItem, children }) {
   const [editing, setEditing] = useState(false);
   const ref = useRef(null);
   useOutsideClick(ref, () => setEditing(false));
@@ -13,9 +13,10 @@ function Quantity({ children }) {
       } pcs`}</button>
     );
   }
+  
   return (
     <div className="quantity" ref={ref}>
-      <button className="quantity__trash-container">
+      <button className="quantity__trash-container" onClick={onRemoveItem}>
         <span className="material-icons quantity__trash-container__trash">
           delete
         </span>
