@@ -4,7 +4,15 @@
   grid-template-columns: [navbar-start] 9.4rem [navbar-end main-start] 1fr [main-end sidebar-start] 40rem [sidebar-end];
   &__main {
     background-color: #fafafe;
-    padding: 0 8rem;
-    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  &__scrollable {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
   }
 }

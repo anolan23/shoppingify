@@ -23,15 +23,17 @@ function Items({ items }) {
 
   return (
     <main className="dashboard__main">
-      <div className="items">
-        <div className="items__heading">
-          <h1>
-            <span className="highlight">Shoppingify</span> allows you take your
-            shopping list wherever you go
-          </h1>
-          <Search setItems={setItems} />
+      <div className="dashboard__scrollable">
+        <div className="items">
+          <div className="items__heading">
+            <h1>
+              <span className="highlight">Shoppingify</span> allows you take
+              your shopping list wherever you go
+            </h1>
+            <Search setItems={setItems} />
+          </div>
+          {renderCategories()}
         </div>
-        {renderCategories()}
       </div>
     </main>
   );

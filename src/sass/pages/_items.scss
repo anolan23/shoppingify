@@ -1,5 +1,6 @@
 .items {
-  margin: 3.2rem 0;
+  padding: 3.2rem 8rem;
+  padding-right: calc(8rem - 17px);
   &__heading {
     display: grid;
     grid-auto-flow: column;
