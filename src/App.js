@@ -7,7 +7,7 @@ import History from './pages/History';
 import Statistics from './pages/Statistics';
 import { useStore } from './context/store';
 import useActions from './hooks/useActions';
-import Popup from './components/Popup';
+import CancelListPopup from './components/CancelListPopup';
 
 function App() {
   const [state] = useStore();
@@ -26,12 +26,12 @@ function App() {
           <Route path="statistics" element={<Statistics />} />
         </Route>
       </Routes>
-      <Popup
+      <CancelListPopup
         show={state.showCancelListPopup}
         close={() => setShowCancelListPopup(false)}
       >
         Popup
-      </Popup>
+      </CancelListPopup>
     </BrowserRouter>
   );
 }

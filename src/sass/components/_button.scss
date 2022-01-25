@@ -1,5 +1,6 @@
 .btn {
   height: 100%;
+  min-height: 6.2rem;
   padding: 0 2.4rem;
   background-color: $color-primary-orange;
   color: white;
@@ -16,5 +17,9 @@
 
   &--sky-blue {
     background-color: #56ccf2;
+  }
+
+  &--red {
+    background-color: #eb5757;
   }
 }
