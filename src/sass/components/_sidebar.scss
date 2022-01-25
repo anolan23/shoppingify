@@ -3,10 +3,11 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  overflow-y: hidden;
+  overflow: hidden;
   &__content {
     flex: 1;
     padding: 3.2rem 4.8rem;
+    overflow-x: hidden;
     overflow-y: auto;
   }
   &__actions {
@@ -23,6 +24,8 @@
 
 .sidebar-list {
   background-color: #fff0de;
+  display: flex;
+  flex-direction: column;
 
   &__add {
     display: grid;
@@ -126,6 +129,12 @@
       border: 2px solid $color-primary-orange;
       border-radius: 1.2rem;
       overflow: hidden;
+      user-select: none;
+
+      &--disabled {
+        pointer-events: none;
+        border-color: #c1c1c4;
+      }
 
       &__input {
         padding-left: 1.6rem;
@@ -138,6 +147,7 @@
           color: #bdbdbd;
         }
       }
+
       &__btn {
         font-weight: 700;
         padding: 2rem 2.5rem;
@@ -146,6 +156,29 @@
         border: none;
         outline: none;
         cursor: pointer;
+        &:disabled {
+          background-color: #c1c1c4;
+        }
+      }
+    }
+  }
+
+  &__empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__message {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #34333a;
+    }
+    &__icon-box {
+      &__icon {
       }
     }
   }

@@ -6,6 +6,8 @@ import { itemsToCategories } from '../lib/helpers';
 import Button from './Button';
 import useActions from '../hooks/useActions';
 import { useStore } from '../context/store';
+import { ReactComponent as PersonIcon } from '../images/person.svg';
+import SaveForm from './SaveForm';
 
 function SidebarList({ mode }) {
   const [state] = useStore();
@@ -14,9 +16,10 @@ function SidebarList({ mode }) {
     useActions();
 
   const { list } = state;
+  const categories = itemsToCategories(list.items);
+  const listIsEmpty = list.items.length === 0;
 
   const renderListCategories = function () {
-    const categories = itemsToCategories(list.items);
     if (!categories) return null;
     return categories.map((category, index) => {
       return (
@@ -45,23 +48,13 @@ function SidebarList({ mode }) {
     switch (mode) {
       case 'edit':
         return (
-          <form
+          <SaveForm
             onSubmit={onSubmit}
-            className="sidebar-list__actions__input-container"
-          >
-            <input
-              className="sidebar-list__actions__input-container__input"
-              placeholder="Enter a name"
-              onChange={onChange}
-              value={title}
-            />
-            <button
-              type="submit"
-              className="sidebar-list__actions__input-container__btn"
-            >
-              Save
-            </button>
-          </form>
+            onChange={onChange}
+            value={title}
+            placeHolder="Enter a name"
+            disabled={listIsEmpty}
+          />
         );
       case 'check':
         return (
@@ -88,6 +81,36 @@ function SidebarList({ mode }) {
     }
   };
 
+  const renderTitle = function () {
+    if (!list.items.length) return null;
+    return (
+      <div className="sidebar-list__list__title">
+        <span className="sidebar-list__list__title__text">{list.title}</span>
+        <span
+          className="material-icons sidebar-list__list__title__icon"
+          onClick={() => {
+            if (mode === 'edit') setMode('check');
+            else setMode('edit');
+          }}
+        >
+          edit
+        </span>
+      </div>
+    );
+  };
+
+  const renderEmpty = function () {
+    if (listIsEmpty)
+      return (
+        <div className="sidebar-list__empty">
+          <div className="sidebar-list__empty__message">No items</div>
+          <div className="sidebar-list__empty__icon-box">
+            <PersonIcon className="sidebar-list__empty__icon-box__icon" />
+          </div>
+        </div>
+      );
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar__content sidebar-list">
@@ -108,22 +131,10 @@ function SidebarList({ mode }) {
           </div>
         </div>
         <section className="sidebar-list__list">
-          <div className="sidebar-list__list__title">
-            <span className="sidebar-list__list__title__text">
-              {list.title}
-            </span>
-            <span
-              className="material-icons sidebar-list__list__title__icon"
-              onClick={() => {
-                if (mode === 'edit') setMode('check');
-                else setMode('edit');
-              }}
-            >
-              edit
-            </span>
-          </div>
+          {renderTitle()}
           {renderListCategories()}
         </section>
+        {renderEmpty()}
       </div>
 
       <div className="sidebar__actions">{renderActions()}</div>
