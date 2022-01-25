@@ -9,6 +9,7 @@ export default function StoreProvider({ children }) {
     items: [],
     item: {},
     list: {
+      title: 'Shopping list',
       items: [],
     },
     lists: [],

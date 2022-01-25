@@ -16,6 +16,8 @@ export default function reducer(state, action) {
       return { ...state, list: { ...state.list, items: action.payload } };
     case 'TOGGLE_ITEM':
       return { ...state, list: { ...state.list, items: action.payload } };
+    case 'COMPLETE_LIST':
+      return { ...state, list: { title: 'Shopping list', items: [] } };
     case 'DELETE_ITEM':
       return state;
     default:

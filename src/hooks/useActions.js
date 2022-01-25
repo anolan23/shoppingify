@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useStore } from '../context/store';
 
+const setStore = (dispatch) => (store) => {
+  dispatch({ type: 'SET_STORE', payload: store });
+};
+
 const setShowCancelListPopup = (dispatch) => async (show) => {
   dispatch({ type: 'SET_SHOW_CANCEL_LIST_POPUP', payload: show });
 };
@@ -34,6 +38,10 @@ const toggleItem = (state, dispatch) => (itemId) => {
 
 const setList = (dispatch) => (list) => {
   dispatch({ type: 'SET_LIST', payload: list });
+};
+
+const completeList = (dispatch) => (list) => {
+  dispatch({ type: 'COMPLETE_LIST', payload: list });
 };
 
 const addItem = (dispatch) => (item) => {
@@ -70,5 +78,7 @@ export default function useActions() {
     removeItem: removeItem(state, dispatch),
     toggleItem: toggleItem(state, dispatch),
     setShowCancelListPopup: setShowCancelListPopup(dispatch),
+    completeList: completeList(dispatch),
+    setStore: setStore(dispatch),
   };
 }

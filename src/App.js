@@ -8,15 +8,23 @@ import Statistics from './pages/Statistics';
 import { useStore } from './context/store';
 import useActions from './hooks/useActions';
 import CancelListPopup from './components/CancelListPopup';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
   const [state] = useStore();
-  const { fetchItems, setList, setShowCancelListPopup } = useActions();
+  const { fetchItems, setStore, setShowCancelListPopup } = useActions();
+
+  useEffect(() => {
+    const store = JSON.parse(localStorage.getItem('store'));
+    store && setStore(store);
+  }, []);
+
+  useLocalStorage();
+
   useEffect(() => {
     fetchItems();
-    const list = JSON.parse(localStorage.getItem('list'));
-    list && setList(list);
   }, []);
+
   return (
     <BrowserRouter>
       <Routes>

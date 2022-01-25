@@ -5,10 +5,15 @@ import ListCategory from './ListCategory';
 import { itemsToCategories } from '../lib/helpers';
 import Button from './Button';
 import useActions from '../hooks/useActions';
+import { useStore } from '../context/store';
 
-function SidebarList({ list, mode, onToggleModeClick }) {
+function SidebarList({ mode }) {
+  const [state] = useStore();
   const [title, setTitle] = useState('');
-  const { setShowCancelListPopup, setMode } = useActions();
+  const { setShowCancelListPopup, setMode, setList, completeList } =
+    useActions();
+
+  const { list } = state;
 
   const renderListCategories = function () {
     const categories = itemsToCategories(list.items);
@@ -27,12 +32,7 @@ function SidebarList({ list, mode, onToggleModeClick }) {
 
   const onSubmit = function (e) {
     e.preventDefault();
-    const string = JSON.stringify({
-      ...list,
-      timestamp: Date.now(),
-      title,
-    });
-    localStorage.setItem('list', string);
+    setList({ ...list, title });
     setMode('check');
     setTitle('');
   };
@@ -72,7 +72,14 @@ function SidebarList({ list, mode, onToggleModeClick }) {
             >
               Cancel
             </Button>
-            <Button color="sky-blue">Complete</Button>
+            <Button
+              onClick={() => {
+                completeList(list);
+              }}
+              color="sky-blue"
+            >
+              Complete
+            </Button>
           </div>
         );
 
@@ -103,7 +110,7 @@ function SidebarList({ list, mode, onToggleModeClick }) {
         <section className="sidebar-list__list">
           <div className="sidebar-list__list__title">
             <span className="sidebar-list__list__title__text">
-              Shopping list
+              {list.title}
             </span>
             <span
               className="material-icons sidebar-list__list__title__icon"

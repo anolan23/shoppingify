@@ -4,6 +4,7 @@ import listsReducer from './listsReducer';
 import modeReducer from './modeReducer';
 import categoriesReducer from './itemsReducer';
 import popupReducer from './popupReducer';
+import storeReducer from './storeReducer';
 
 function combineReducers(...reducers) {
   return (state, action) =>
@@ -16,5 +17,6 @@ export default combineReducers(
   listReducer,
   listsReducer,
   modeReducer,
-  popupReducer
+  popupReducer,
+  storeReducer
 );
