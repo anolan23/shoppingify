@@ -6,6 +6,8 @@ export default function reducer(state, action) {
       return { ...state, mode: 'edit' };
     case 'ADD_ITEM_TO_LIST':
       return { ...state, mode: 'edit' };
+    case 'CANCEL_LIST':
+      return { ...state, mode: 'edit' };
     case 'COMPLETE_LIST':
       return { ...state, mode: 'edit' };
     case 'SET_MODE':

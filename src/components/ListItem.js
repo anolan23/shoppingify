@@ -4,7 +4,7 @@ import Checkbox from './Checkbox';
 
 function ListItem({ item, mode }) {
   const { name, qty, id, checked } = item;
-  const { removeItem, toggleItem } = useActions();
+  const { removeItem, toggleItem, increaseQty } = useActions();
 
   switch (mode) {
     case 'check':
@@ -28,7 +28,12 @@ function ListItem({ item, mode }) {
       return (
         <div className="sidebar-list__category__item">
           <span className="sidebar-list__category__item__name">{name}</span>
-          <Quantity onRemoveItem={() => removeItem(id)}>{qty}</Quantity>
+          <Quantity
+            onRemoveItem={() => removeItem(id)}
+            increaseQty={(increaseBy) => increaseQty(id, increaseBy)}
+          >
+            {qty}
+          </Quantity>
         </div>
       );
   }

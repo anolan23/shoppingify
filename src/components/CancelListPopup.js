@@ -1,9 +1,11 @@
 import Button from './Button';
 import Popup from './Popup';
 import { useStore } from '../context/store';
+import useActions from '../hooks/useActions';
 
 function CancelListPopup({ show, close }) {
   const [state] = useStore();
+  const { cancelList } = useActions();
   const { title } = state.list;
   return (
     <Popup show={show} close={close}>
@@ -16,7 +18,15 @@ function CancelListPopup({ show, close }) {
         <Button onClick={close} color="transparent">
           cancel
         </Button>
-        <Button color="red">Yes</Button>
+        <Button
+          onClick={() => {
+            cancelList(state.list);
+            close();
+          }}
+          color="red"
+        >
+          Yes
+        </Button>
       </div>
     </Popup>
   );

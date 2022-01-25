@@ -6,7 +6,7 @@ export default function reducer(state, action) {
     case 'ADD_ITEM_TO_LIST':
       const newItems = [
         ...state.list.items,
-        { ...action.payload, checked: false },
+        { ...action.payload, checked: false, qty: 1 },
       ];
       return {
         ...state,
@@ -16,6 +16,10 @@ export default function reducer(state, action) {
       return { ...state, list: { ...state.list, items: action.payload } };
     case 'TOGGLE_ITEM':
       return { ...state, list: { ...state.list, items: action.payload } };
+    case 'INCREASE_QTY':
+      return { ...state, list: { ...state.list, items: action.payload } };
+    case 'CANCEL_LIST':
+      return { ...state, list: { title: 'Shopping list', items: [] } };
     case 'COMPLETE_LIST':
       return { ...state, list: { title: 'Shopping list', items: [] } };
     case 'DELETE_ITEM':

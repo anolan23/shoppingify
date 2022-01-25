@@ -36,12 +36,26 @@ const toggleItem = (state, dispatch) => (itemId) => {
   dispatch({ type: 'TOGGLE_ITEM', payload: newItems });
 };
 
+const increaseQty = (state, dispatch) => (itemId, increaseBy) => {
+  const { list } = state;
+  const newItems = list.items.map((item) => {
+    if (item.id !== itemId) return item;
+    if (item.qty < 2 && increaseBy < 0) return item;
+    return { ...item, qty: item.qty + increaseBy };
+  });
+  dispatch({ type: 'INCREASE_QTY', payload: newItems });
+};
+
 const setList = (dispatch) => (list) => {
   dispatch({ type: 'SET_LIST', payload: list });
 };
 
+const cancelList = (dispatch) => (list) => {
+  dispatch({ type: 'CANCEL_LIST', payload: { ...list, status: 'canceled' } });
+};
+
 const completeList = (dispatch) => (list) => {
-  dispatch({ type: 'COMPLETE_LIST', payload: list });
+  dispatch({ type: 'COMPLETE_LIST', payload: { ...list, status: 'complete' } });
 };
 
 const addItem = (dispatch) => (item) => {
@@ -80,5 +94,7 @@ export default function useActions() {
     setShowCancelListPopup: setShowCancelListPopup(dispatch),
     completeList: completeList(dispatch),
     setStore: setStore(dispatch),
+    cancelList: cancelList(dispatch),
+    increaseQty: increaseQty(state, dispatch),
   };
 }
