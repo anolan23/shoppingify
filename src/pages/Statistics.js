@@ -31,6 +31,7 @@ function Statistics({ lists }) {
               {renderCategories()}
             </StatContainer>
           </div>
+          <StatContainer title="Monthly Summary"></StatContainer>
         </div>
       </div>
     </main>
