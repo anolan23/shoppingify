@@ -33,7 +33,10 @@ function App() {
           <Route path="" element={<Items items={state.items} />} />
           <Route path="history" element={<History lists={state.lists} />} />
           <Route path="history/:id" element={<List lists={state.lists} />} />
-          <Route path="statistics" element={<Statistics />} />
+          <Route
+            path="statistics"
+            element={<Statistics lists={state.lists} />}
+          />
         </Route>
       </Routes>
       <CancelListPopup

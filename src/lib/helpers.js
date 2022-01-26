@@ -56,3 +56,56 @@ export function indexToMonth(index) {
   ];
   return month[index];
 }
+
+export const itemsFromLists = function (lists) {
+  let allItems = [];
+  for (let { items } of lists) {
+    allItems = [...allItems, ...items];
+  }
+  return allItems;
+};
+
+export function topItemsFromLists(lists) {
+  const createItemsMap = function (lists) {
+    const itemsMap = {};
+    const items = itemsFromLists(lists);
+    let totalItemQty = 0;
+    for (let item of items) {
+      if (!itemsMap[item.name]) itemsMap[item.name] = 1;
+      else {
+        itemsMap[item.name] = itemsMap[item.name] + item.qty;
+      }
+      totalItemQty += +itemsMap[item.name];
+    }
+    return { itemsMap, totalItemQty };
+  };
+
+  const { itemsMap, totalItemQty } = createItemsMap(lists);
+  const items = Object.entries(itemsMap)
+    .map((item) => {
+      const [name, count] = item;
+      return {
+        name,
+        count,
+        percent: count / totalItemQty,
+      };
+    })
+    .sort((a, b) => {
+      return b.count - a.count;
+    })
+    .slice(0, 3);
+  return items;
+}
+
+export function topCategories(lists) {
+  const items = itemsFromLists(lists);
+  const categories = itemsToCategories(items);
+  return categories
+    .sort((a, b) => {
+      return b.items.length - a.items.length;
+    })
+    .slice(0, 3)
+    .map((category) => {
+      return { ...category, percent: category.items.length / items.length };
+    });
+}

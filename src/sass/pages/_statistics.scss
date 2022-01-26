@@ -1,0 +1,9 @@
+.statistics {
+  padding: 3.2rem 8rem;
+  padding-right: calc(8rem - 17px);
+  &__trending {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6.4rem;
+  }
+}
