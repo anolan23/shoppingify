@@ -14,7 +14,6 @@ function MyAsyncCreatableSelect({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = function (inputValue) {
-    console.log(inputValue);
     onChange(inputValue);
   };
 

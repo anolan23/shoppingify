@@ -51,7 +51,7 @@ const setList = (dispatch) => (list) => {
 };
 
 const cancelList = (dispatch) => (list) => {
-  dispatch({ type: 'CANCEL_LIST', payload: { ...list, status: 'canceled' } });
+  dispatch({ type: 'CANCEL_LIST', payload: { ...list, status: 'cancelled' } });
 };
 
 const completeList = (dispatch) => (list) => {

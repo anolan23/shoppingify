@@ -8,7 +8,7 @@ import useActions from '../hooks/useActions';
 function Sidebar() {
   const [state] = useStore();
   const { setMode, addItem } = useActions();
-  console.log(state);
+  // console.log(state);
 
   const renderMode = () => {
     switch (state.mode) {
