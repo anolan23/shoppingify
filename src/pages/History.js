@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HistoryCat from '../components/HistoryCat';
 import { listsToCategories, indexToMonth } from '../lib/helpers';
 

@@ -1,5 +1,16 @@
 function Category({ title, items, onItemClick }) {
-  const renderItems = () => {
+  const renderIcon = function (qty) {
+    if (qty) {
+      return (
+        <span className="items__category__item__icon--qty">{`${qty} pcs`}</span>
+      );
+    }
+    return (
+      <span className="material-icons items__category__item__icon">add</span>
+    );
+  };
+
+  const renderItems = function () {
     if (!items) return null;
     return items.map((item, index) => {
       const { name, qty } = item;
@@ -10,9 +21,7 @@ function Category({ title, items, onItemClick }) {
           onClick={() => onItemClick(item)}
         >
           <span className="items__category__item__name">{name}</span>
-          <span className="material-icons items__category__item__icon">
-            add
-          </span>
+          {renderIcon(qty)}
         </div>
       );
     });

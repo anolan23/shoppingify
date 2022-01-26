@@ -1,0 +1,24 @@
+.list {
+  padding: 3.2rem 8rem;
+  padding-right: calc(8rem - 17px);
+  &__title {
+    margin-top: 3.2rem;
+    margin-bottom: 2rem;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #34333a;
+  }
+  &__date {
+    display: flex;
+    align-items: center;
+    color: #c1c1c4;
+
+    &__calendar {
+      font-size: 2.1rem;
+    }
+    &__text {
+      margin-left: 1rem;
+      font-size: 1.2rem;
+    }
+  }
+}

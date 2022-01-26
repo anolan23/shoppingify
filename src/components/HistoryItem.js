@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 function HistoryItem({ item }) {
+  const navigate = useNavigate();
   const { title, timestamp, status } = item;
   const date = new Date(timestamp);
   const options = {
@@ -9,7 +12,7 @@ function HistoryItem({ item }) {
   };
   const dateString = date.toLocaleDateString(undefined, options);
   return (
-    <div className="history-item">
+    <div className="history-item" onClick={() => navigate(`${timestamp}`)}>
       <span className="history-item__title">{title}</span>
       <div className="history-item__info">
         <span className="material-icons history-item__info__calendar">

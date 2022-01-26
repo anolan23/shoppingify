@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Items from './pages/Items';
 import History from './pages/History';
+import List from './pages/List';
 import Statistics from './pages/Statistics';
 import { useStore } from './context/store';
 import useActions from './hooks/useActions';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Items items={state.items} />} />
           <Route path="history" element={<History lists={state.lists} />} />
+          <Route path="history/:id" element={<List lists={state.lists} />} />
           <Route path="statistics" element={<Statistics />} />
         </Route>
       </Routes>
