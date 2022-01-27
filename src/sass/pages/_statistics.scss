@@ -1,9 +1,17 @@
 .statistics {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   padding: 3.2rem 8rem;
   padding-right: calc(8rem - 17px);
   &__trending {
+    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6.4rem;
+  }
+  &__summary {
+    flex: 1;
   }
 }

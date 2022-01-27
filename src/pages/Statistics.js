@@ -1,11 +1,28 @@
 import React from 'react';
+import {
+  ResponsiveContainer,
+  LineChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Line,
+} from 'recharts';
 import StatContainer from '../components/StatContainer';
 import Stat from '../components/Stat';
-import { topItemsFromLists, topCategories } from '../lib/helpers';
+import {
+  topItemsFromLists,
+  topCategories,
+  listsToHistories,
+  monthlySummaryData,
+} from '../lib/helpers';
 
 function Statistics({ lists }) {
   const items = topItemsFromLists(lists);
   const categories = topCategories(lists);
+  const histories = listsToHistories(lists);
+  const data = monthlySummaryData(histories);
 
   const renderItems = function () {
     if (!items) return null;
@@ -21,6 +38,7 @@ function Statistics({ lists }) {
       return <Stat key={index} title={name} percent={percent} />;
     });
   };
+
   return (
     <main className="dashboard__main">
       <div className="dashboard__scrollable">
@@ -31,7 +49,26 @@ function Statistics({ lists }) {
               {renderCategories()}
             </StatContainer>
           </div>
-          <StatContainer title="Monthly Summary"></StatContainer>
+          <div className="statistics__summary">
+            <StatContainer title="Monthly Summary">
+              <ResponsiveContainer width="100%" height={275}>
+                <LineChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="itemsCount"
+                    stroke="#f9a109"
+                    strokeWidth={2}
+                    name="items"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </StatContainer>
+          </div>
         </div>
       </div>
     </main>

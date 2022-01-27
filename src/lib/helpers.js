@@ -16,7 +16,7 @@ export function itemsToCategories(items = []) {
   return categories;
 }
 
-export function listsToCategories(lists = []) {
+export function listsToHistories(lists = []) {
   const categories = lists.reduce((acc, curr) => {
     const date = new Date(curr.timestamp);
     const month = date.getMonth();
@@ -26,6 +26,7 @@ export function listsToCategories(lists = []) {
     );
     if (!category) {
       acc.push({
+        timestamp: curr.timestamp,
         month,
         year,
         lists: [curr],
@@ -59,7 +60,8 @@ export function indexToMonth(index) {
 
 export const itemsFromLists = function (lists) {
   let allItems = [];
-  for (let { items } of lists) {
+  const completedLists = lists.filter((list) => list.status === 'complete');
+  for (let { items } of completedLists) {
     allItems = [...allItems, ...items];
   }
   return allItems;
@@ -71,7 +73,7 @@ export function topItemsFromLists(lists) {
     const items = itemsFromLists(lists);
     let totalItemQty = 0;
     for (let item of items) {
-      if (!itemsMap[item.name]) itemsMap[item.name] = 1;
+      if (!itemsMap[item.name]) itemsMap[item.name] = item.qty;
       else {
         itemsMap[item.name] = itemsMap[item.name] + item.qty;
       }
@@ -108,4 +110,33 @@ export function topCategories(lists) {
     .map((category) => {
       return { ...category, percent: category.items.length / items.length };
     });
+}
+
+export function monthlySummaryData(histories) {
+  const date = new Date();
+  let months = [];
+  for (let i = 5; i >= 0; i--) {
+    const past = new Date(date);
+    past.setMonth(past.getMonth() - i);
+    months.push({
+      month: indexToMonth(past.getMonth()),
+      year: past.getFullYear(),
+      itemsCount: 0,
+    });
+  }
+
+  const dataArr = histories.map((history) => {
+    const { lists, month, year } = history;
+    let itemsCount = 0;
+    const items = itemsFromLists(lists);
+    items.forEach((item) => (itemsCount += item.qty));
+    return { month: indexToMonth(month), year, itemsCount };
+  });
+  const data = months.map((month) => {
+    const found = dataArr.find(
+      (dataObj) => dataObj.month === month.month && dataObj.year === month.year
+    );
+    return found || month;
+  });
+  return data;
 }

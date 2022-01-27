@@ -1,10 +1,10 @@
 import React from 'react';
 
 import HistoryCat from '../components/HistoryCat';
-import { listsToCategories, indexToMonth } from '../lib/helpers';
+import { listsToHistories, indexToMonth } from '../lib/helpers';
 
 function History({ lists }) {
-  const categories = listsToCategories(lists);
+  const categories = listsToHistories(lists);
   const renderCategories = function () {
     if (!categories) return null;
     return categories.map((category, index) => {
