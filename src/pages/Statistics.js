@@ -35,7 +35,7 @@ function Statistics({ lists }) {
     if (!categories) return null;
     return categories.map((category, index) => {
       const { name, percent } = category;
-      return <Stat key={index} title={name} percent={percent} />;
+      return <Stat key={index} title={name} percent={percent} color="blue" />;
     });
   };
 

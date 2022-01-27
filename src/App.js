@@ -29,7 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard" element={<Dashboard list={state.list} />}>
           <Route path="" element={<Items items={state.items} />} />
           <Route path="history" element={<History lists={state.lists} />} />
           <Route path="history/:id" element={<List lists={state.lists} />} />

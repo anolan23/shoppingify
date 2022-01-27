@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { ReactComponent as Icon } from '../images/bottle.svg';
 import ListCategory from './ListCategory';
@@ -112,7 +112,7 @@ function SidebarList({ mode }) {
   };
 
   return (
-    <aside className="sidebar">
+    <React.Fragment>
       <div className="sidebar__content sidebar-list">
         <div className="sidebar-list__add">
           <div className="sidebar-list__add__icon-container">
@@ -138,7 +138,7 @@ function SidebarList({ mode }) {
       </div>
 
       <div className="sidebar__actions">{renderActions()}</div>
-    </aside>
+    </React.Fragment>
   );
 }
 export default SidebarList;

@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import React from 'react';
 
 import Button from './Button';
 import Input from './Input';
@@ -46,7 +47,7 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
   });
 
   return (
-    <aside className="sidebar">
+    <React.Fragment>
       <form
         id="add-item"
         onSubmit={formik.handleSubmit}
@@ -122,7 +123,7 @@ function SidebarAdd({ onCancelClick, onSaveClick }) {
           </Button>
         </div>
       </div>
-    </aside>
+    </React.Fragment>
   );
 }
 export default SidebarAdd;

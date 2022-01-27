@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from '../images/logo.svg';
 import Cart from './Cart';
 import NavTab from './NavTab';
 
-function Navbar() {
+function Navbar({ list }) {
   const navigate = useNavigate();
   return (
     <nav className="navbar">
@@ -14,7 +14,7 @@ function Navbar() {
           <NavTab to="history" icon="replay" />
           <NavTab to="statistics" icon="insert_chart_outlined" />
         </div>
-        <Cart />
+        <Cart cartSize={list.items.length} />
       </ul>
     </nav>
   );

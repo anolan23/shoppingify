@@ -34,6 +34,10 @@ function Sidebar() {
         break;
     }
   };
-  return <React.Fragment>{renderMode()}</React.Fragment>;
+  return (
+    <aside id="sidebar" className="sidebar">
+      {renderMode()}
+    </aside>
+  );
 }
 export default Sidebar;

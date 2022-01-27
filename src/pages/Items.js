@@ -9,13 +9,18 @@ function Items({ items }) {
   const categories = itemsToCategories(items);
   const renderCategories = function () {
     if (!categories) return null;
+    const sidebar = document.querySelector('#sidebar');
+
     return categories.map((category) => {
       return (
         <Category
           key={category.id}
           title={category.name}
           items={category.items}
-          onItemClick={(item) => setItem({ ...item, category: category.name })}
+          onItemClick={(item) => {
+            setItem({ ...item, category: category.name });
+            sidebar.scrollIntoView({ behavior: 'smooth' });
+          }}
         />
       );
     });

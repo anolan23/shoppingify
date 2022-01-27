@@ -1,8 +1,9 @@
+import React from 'react';
 import Button from './Button';
 
 function SidebarItem({ item, onDeleteClick, onAddClick, onBackClick }) {
   return (
-    <aside className="sidebar">
+    <React.Fragment>
       <div className="sidebar__content">
         <span className="link" onClick={onBackClick}>
           &larr; back
@@ -45,7 +46,7 @@ function SidebarItem({ item, onDeleteClick, onAddClick, onBackClick }) {
           </Button>
         </div>
       </div>
-    </aside>
+    </React.Fragment>
   );
 }
 export default SidebarItem;

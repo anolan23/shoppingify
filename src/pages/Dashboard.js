@@ -2,12 +2,14 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { Outlet } from 'react-router-dom';
 
-function Dashboard() {
+function Dashboard({ list }) {
   return (
     <div className="dashboard">
-      <Navbar />
-      <Outlet />
-      <Sidebar />
+      <Navbar list={list} />
+      <div className="dashboard__content">
+        <Outlet />
+        <Sidebar />
+      </div>
     </div>
   );
 }
