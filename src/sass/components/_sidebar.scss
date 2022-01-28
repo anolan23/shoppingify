@@ -1,7 +1,6 @@
 .sidebar {
   width: 39rem;
   min-height: 100vh;
-  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +11,7 @@
   }
   @media screen and (max-width: 800px) {
     width: 100%;
-    overflow: unset;
+    overflow: visible;
   }
   &__content {
     flex: 1;
@@ -20,7 +19,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     @media screen and (max-width: 800px) {
-      overflow-y: unset;
+      overflow: visible;
     }
     @media screen and (max-width: 550px) {
       padding: 3.2rem 1.6rem;

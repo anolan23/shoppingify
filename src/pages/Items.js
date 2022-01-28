@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
+
 import Category from '../components/Category';
 import Search from '../components/Search';
 import { itemsToCategories } from '../lib/helpers';
 import useActions from '../hooks/useActions';
+import useScrollTop from '../hooks/useScrollTop';
 
 function Items({ items }) {
+  const dashBoardMainEl = useRef(null);
+  useScrollTop(dashBoardMainEl);
   const { setItem, setItems } = useActions();
   const categories = itemsToCategories(items);
   const renderCategories = function () {
@@ -27,7 +31,7 @@ function Items({ items }) {
   };
 
   return (
-    <main className="dashboard__main">
+    <main className="dashboard__main" ref={dashBoardMainEl}>
       <div className="dashboard__scrollable">
         <div className="items">
           <div className="items__heading">
