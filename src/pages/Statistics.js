@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   ResponsiveContainer,
   LineChart,
@@ -17,8 +17,12 @@ import {
   listsToHistories,
   monthlySummaryData,
 } from '../lib/helpers';
+import useScrollTop from '../hooks/useScrollTop';
 
 function Statistics({ lists }) {
+  const dashBoardMainEl = useRef(null);
+  useScrollTop(dashBoardMainEl);
+
   const items = topItemsFromLists(lists);
   const categories = topCategories(lists);
   const histories = listsToHistories(lists);
@@ -26,6 +30,8 @@ function Statistics({ lists }) {
 
   const renderItems = function () {
     if (!items) return null;
+    if (!items.length)
+      return <div className="empty empty--small">No top items</div>;
     return items.map((item, index) => {
       const { name, percent } = item;
       return <Stat key={index} title={name} percent={percent} />;
@@ -33,6 +39,8 @@ function Statistics({ lists }) {
   };
   const renderCategories = function () {
     if (!categories) return null;
+    if (!categories.length)
+      return <div className="empty empty--small">No top categories</div>;
     return categories.map((category, index) => {
       const { name, percent } = category;
       return <Stat key={index} title={name} percent={percent} color="blue" />;
@@ -40,7 +48,7 @@ function Statistics({ lists }) {
   };
 
   return (
-    <main className="dashboard__main">
+    <main className="dashboard__main" ref={dashBoardMainEl}>
       <div className="dashboard__scrollable">
         <div className="statistics">
           <div className="statistics__trending">

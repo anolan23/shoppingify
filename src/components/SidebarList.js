@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as Icon } from '../images/bottle.svg';
 import ListCategory from './ListCategory';
@@ -14,6 +15,7 @@ function SidebarList({ mode }) {
   const [title, setTitle] = useState('');
   const { setShowCancelListPopup, setMode, setList, completeList } =
     useActions();
+  const navigate = useNavigate();
 
   const { list } = state;
   const categories = itemsToCategories(list.items);
@@ -68,6 +70,7 @@ function SidebarList({ mode }) {
             <Button
               onClick={() => {
                 completeList(list);
+                navigate(`history`);
               }}
               color="sky-blue"
             >
