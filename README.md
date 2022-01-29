@@ -9,7 +9,16 @@ PostgresQL,
 localStorage
 
 ## API
-You can visit `/api/items` or `/api/categories` to get the respective data from the API.
+You can make a GET request to:
+\
+\
+[/api/items](https://shoppingify-aaron.herokuapp.com/api/items)
+\
+\
+[/api/categories](https://shoppingify-aaron.herokuapp.com/api/categories)
+\
+\
+To get a preview of data that comes from the API.
 
 ## Available Scripts
 
