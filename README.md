@@ -1,24 +1,19 @@
 # Shoppingify
 
-This is a full stack application that tracks your shopping lists that you've created.  A statistics page displays your top items/categories as well as a chart which compares month to month differences.
+This is a full stack application that tracks shopping lists that you create.  A statistics page displays your top items & categories as well as a chart which compares month to month differences.
 
 ## Built with
-Reactjs,
-Nodejs/Express,
-PostgresQL,
-localStorage
+- Reactjs
+- Nodejs/Express
+- PostgresQL
+- localStorage
 
 ## API
-You can make a GET request to:
-\
+To get a preview of data, you can make a GET request to:
 \
 [/api/items](https://shoppingify-aaron.herokuapp.com/api/items)
 \
-\
 [/api/categories](https://shoppingify-aaron.herokuapp.com/api/categories)
-\
-\
-To get a preview of data that comes from the API.
 
 ## Available Scripts
 
